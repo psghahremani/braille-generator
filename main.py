@@ -22,7 +22,7 @@ for item in braille_characters:
     item.pop('dots_info')
     item['array'] = array
 
-image = Image.open('input3.png').convert('RGB')
+image = Image.open('input3.webp').convert('RGB')
 pixels = image.load()
 
 rows = image.size[1]
@@ -42,12 +42,11 @@ for row in range(image.size[1]):
 image_average /= (image.size[0] * image.size[1])
 
 with open('output.html', 'w') as html_file:
+    html_file.write(
+        '<html><meta charset="UTF-8">' +
+        '<body style="font-family:monospace;color:rgb(255,255,255);background-color:rgb(20,20,20);">',
+    )
     for threshold in range(255, -1, -1):
-        html_file.write(
-            '<html><meta charset="UTF-8">' +
-            '<body style="font-family:monospace;color:rgb(255,255,255);background-color:rgb(20,20,20);">',
-        )
-
         matrix = [[False for i in range(columns)] for j in range(rows)]
         for row in range(image.size[1]):
             for column in range(image.size[0]):
